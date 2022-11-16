@@ -42,3 +42,5 @@ print(f'Lastly the test set is from {1150-(test_set() + 1)} to index 1150')
 #6) Error/cost function
 #7) B(l)ackpropagation
 #8) When do we stop / when is enough enough.
+
+#I will just add a comment to see if there is any difference 
