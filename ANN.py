@@ -31,9 +31,9 @@ def test_set():
     first_index = int(1150 * + .15)
     return first_index
 
-print(f'The training set is from index 0 to {training_set()}\n')
+print(f'The training set is from index 0 to {training_set()}')
 print(f'The validation set is from index {training_set() + 1} to index {validation_set(training_set() + 1)}')
-print(f'Lastly the test set is from {1150-(test_set() + 1)} to index 1150')
+print(f'Lastly the test set is from {1150-(test_set() - 1)} to index 1150')
 
 
 #What needs to be done:
