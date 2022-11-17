@@ -14,22 +14,25 @@ from pandas import read_csv as load_file
 #This is not the correct search way
 #open('c:\Users\fredr\OneDrive\Dokument\Civilingenjör robotik\Pågående kurser\DVA493\Lab_1\Diabetic.txt', 'r')
 
+# Returns the final index of the training set
 def training_set():
     #The training set is supposed to be 75% of entire set
-    final_input_index = int(1150 * .75)
-    return final_input_index
+    final_index = int(1150 * .75)
+    return final_index
 
-def validation_index(start_index):
+# Takes the start index input and returns the last index of validation set
+def validation_set(start_index):
     size_of_set = int(1150 * 0.1)
     last_index = start_index + size_of_set
     return last_index
 
+# Return the index which corresponds to 15% of the entire dataset
 def test_set():
     first_index = int(1150 * + .15)
     return first_index
 
 print(f'The training set is from index 0 to {training_set()}\n')
-print(f'The validation set is from index {training_set() + 1} to index {validation_index(training_set() + 1)}')
+print(f'The validation set is from index {training_set() + 1} to index {validation_set(training_set() + 1)}')
 print(f'Lastly the test set is from {1150-(test_set() + 1)} to index 1150')
 
 
