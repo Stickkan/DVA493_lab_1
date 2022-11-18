@@ -12,7 +12,9 @@ from pandas import read_csv as load_file
 ##data = load_file(file_name)
 
 #This is not the correct search way
-#open('c:\Users\fredr\OneDrive\Dokument\Civilingenjör robotik\Pågående kurser\DVA493\Lab_1\Diabetic.txt', 'r')
+data_set = open(r"Diabetic.txt", "r")
+
+print(data_set.read())
 
 # Returns the final index of the training set
 def training_set():
@@ -36,14 +38,12 @@ print(f'The validation set is from index {training_set() + 1} to index {validati
 print(f'Lastly the test set is from {1150-(test_set() - 1)} to index 1150')
 
 
-#What needs to be done:
-#1) Learn Git
-#2) How to load the dataset
-#3) Divide the dataset into subsets (training/validation/test)
-#4) Create nodes and layers (Ning: No more than 2 hidden layers with 10 nodes in each)
-#5) Forwardpropagation
-#6) Error/cost function
-#7) B(l)ackpropagation
-#8) When do we stop / when is enough enough.
-
-#I will just add a comment to see if there is any difference...  there was a difference :-)
+# ! this is what needs to be done
+# 1) Learn Git
+# 2) How to load the dataset
+# 3) Divide the dataset into subsets (training/validation/test)
+# 4) Create nodes and layers (Ning: No more than 2 hidden layers with 10 nodes in each)
+# 5) Forwardpropagation
+# 6) Error/cost function
+# 7) B(l)ackpropagation
+# 8) When do we stop / when is enough enough.
