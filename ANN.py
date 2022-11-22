@@ -1,5 +1,6 @@
 import numpy as nm
 import matplotlib.pyplot as plt
+import pandas as pd
 from os import path
 from pandas import read_csv as load_file
 
@@ -13,6 +14,14 @@ from pandas import read_csv as load_file
 
 #This is not the correct search way
 #open('c:\Users\fredr\OneDrive\Dokument\Civilingenjör robotik\Pågående kurser\DVA493\Lab_1\Diabetic.txt', 'r')
+
+#Open file on Viktors computer
+file = 'Diabetic.txt'
+file_path = path.join(path.dirname(path.realpath(__file__)), file)
+data = pd.read_csv(file_path, on_bad_lines='skip')
+
+#Open file on Fredriks computer
+
 
 def training_set():
     #The training set is supposed to be 75% of entire set
@@ -31,6 +40,8 @@ def test_set():
 print(f'The training set is from index 0 to {training_set()}\n')
 print(f'The validation set is from index {training_set() + 1} to index {validation_index(training_set() + 1)}')
 print(f'Lastly the test set is from {1150-(test_set() + 1)} to index 1150')
+print(data)
+
 
 
 #What needs to be done:
