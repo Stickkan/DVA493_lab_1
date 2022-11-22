@@ -13,11 +13,6 @@ from sklearn.model_selection import train_test_split
 
 # ! Processing the data for use in the ANN
 
-#Open file on Viktors computer
-file = 'Diabetic.txt'
-file_path = path.join(path.dirname(path.realpath(__file__)), file)
-data = pd.read_csv(file_path, on_bad_lines='skip')
-
 #Open file on Fredriks computer
 
 #We should try to 
