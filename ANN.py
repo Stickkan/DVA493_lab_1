@@ -20,26 +20,7 @@ data = pd.read_csv(file_path, on_bad_lines='skip')
 
 #Open file on Fredriks computer
 
-
-def training_set():
-    #The training set is supposed to be 75% of entire set
-    final_input_index = int(1150 * .75)
-    return final_input_index
-
-def validation_index(start_index):
-    size_of_set = int(1150 * 0.1)
-    last_index = start_index + size_of_set
-    return last_index
-
-def test_set():
-    first_index = int(1150 * + .15)
-    return first_index
-
-print(f'The training set is from index 0 to {training_set()}\n')
-print(f'The validation set is from index {training_set() + 1} to index {validation_index(training_set() + 1)}')
-print(f'Lastly the test set is from {1150-(test_set() + 1)} to index 1150')
-print(data)
-
+#We should try to 
 df = pd.read_csv('Diabetic.txt') # Reads the teext file and store it in dataframe (df)
 
 
