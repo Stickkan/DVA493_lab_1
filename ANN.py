@@ -14,9 +14,9 @@ from sklearn.model_selection import train_test_split
 # ! Processing the data for use in the ANN
 
 #Open file on Viktors computer
-file = 'Diabetic.txt'
-file_path = path.join(path.dirname(path.realpath(__file__)), file)
-data = pd.read_csv(file_path, on_bad_lines='skip')
+#file = 'Diabetic.txt'
+#file_path = path.join(path.dirname(path.realpath(__file__)), file)
+#data = pd.read_csv(file_path, on_bad_lines='skip')
 
 #Open file on Fredriks computer
 
@@ -46,9 +46,9 @@ print(X_training.shape, X_val.shape, X_test.shape, Y_training.shape, Y_val.shape
 # ! Setting up the architecture of the ANN
 
 model = Sequential([
-    Dense(10, activation='relu', input_shape=(18,)),            #Defining the architecture according to the tip given by Mr. Xiong where there are 2 hidden layers with 10 nodes in each
-    Dense(10, activation='relu'),                               #Input layer has 18 nodes. The hidden layers are ReLU activated however the output is sigmoid activated
-    Dense(1, activation='sigmoid')                              #Dense() refers to a fully connected layer
+    Dense(10, activation='sigmoid', input_shape=(19,)),             #Defining the architecture according to the tip given by Mr. Xiong where there are 2 hidden layers with 10 nodes in each
+    Dense(10, activation='sigmoid'),                                #Input layer has 18 nodes. The hidden layers are ReLU activated however the output is sigmoid activated
+    Dense(1, activation='sigmoid')                                  #Dense() refers to a fully connected layer
 
 ])                                                                                      
 
@@ -56,7 +56,7 @@ model = Sequential([
 
 model.compile(optimizer='sgd', loss = 'binary_crossentropy', metrics=['accuracy'])                                       
 
-history = model.fit(X_training, Y_training, batch_size= 862, epochs= 1000, validation_data=(X_val, Y_val))
+history = model.fit(X_training, Y_training, batch_size= 862, epochs= 2000, validation_data=(X_val, Y_val))
 
 
 # ! this is what needs to be done
