@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
 
 class NeuralNetwork:
     def __init__(self, learning_rate):
@@ -23,7 +26,7 @@ class NeuralNetwork:
         layer_2 = self._sigmoid(layer_1)
         prediction = layer_2
 
-        derror_dprediction = 2 * (prediction - target)
+        derror_dprediction = 2 * (prediction - target)                                      #Derivative of x^2
         dprediction_dlayer1 = self._sigmoid_deriv(layer_1)
         dlayer1_dbias = 1
         dlayer1_dweights = (0 * self.weights) + (1 * input_vector)
@@ -35,12 +38,13 @@ class NeuralNetwork:
 
     def _update_parameters(self, derror_dbias, derror_dweights):
         self.bias = self.bias - (derror_dbias * self.learning_rate)
-        self.weights = self.weights - (derror_dweights * self.learning)
+        self.weights = self.weights - (derror_dweights * self.learning_rate)
 
-    def train(self, input_vectors, targets, iterations):
+    # ! Understand what this segment is doing
+    def train(self, input_vectors, targets, epochs):
         cumulative_errors = []
-        for current_iteration in range(iterations):
-            random_data_index = np.random.randint(len(input_vectors))
+        for current_iteration in range(epochs):
+            random_data_index = np.random.randint(len(input_vectors))                       #Takes a random index from within the training set
 
             input_vector = input_vectors[random_data_index]
             target = targets[random_data_index]
@@ -64,6 +68,7 @@ class NeuralNetwork:
         
         return cumulative_errors
 
+
 input_vectors = np.array(
     [
         [3, 1.5],
@@ -79,11 +84,32 @@ input_vectors = np.array(
 
 targets = np.array([0, 1, 0, 1, 0, 1, 1, 0])
 
-learning_rate = 0.1
+"""
+df = pd.read_csv('Diabetic.txt') # Reads the teext file and store it in dataframe (df)
+
+
+
+data_set = df.values # Converting the dataframe (df) into an array
+
+X = data_set[:,0:19]    # This is all the rows and every column except the last one
+Y = data_set[:,19]      # This is all the rows but only the last column
+
+
+min_max_scaler = preprocessing.MinMaxScaler()   # Scales the input features of X so that all input of the dataset lie within the range of 0 and 1
+X_scale = min_max_scaler.fit_transform(X)       # This is combination with a sigmoid function or ReLU algorithm will decide if the node should fire or not
+
+
+
+X_training, X_val_and_test, Y_training, Y_val_and_test = train_test_split(X_scale, Y, test_size=0.25)   # Splits the dataset into 75% training and 25% validation and test set
+
+X_val, X_test, Y_val, Y_test = train_test_split(X_val_and_test, Y_val_and_test, test_size=0.4)          # Splits the 25% into 10% validation and 15% into test set
+"""
+
+learning_rate = 0.01
 
 neural_network = NeuralNetwork(learning_rate)
 
-training_error = neural_network.train(input_vectors, targets, 100)
+training_error = neural_network.train(input_vectors, targets, 10000)
 
 plt.plot(training_error)
 plt.xlabel("Iterations")
