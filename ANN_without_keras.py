@@ -7,8 +7,6 @@ from sklearn import preprocessing
 
 df = pd.read_csv('Diabetic.txt') # Reads the teext file and store it in dataframe (df)
 
-
-
 data_set = df.values # Converting the dataframe (df) into an array
 
 X = data_set[:,0:19]    # This is all the rows and every column except the last one
@@ -17,6 +15,7 @@ Y = data_set[:,19]      # This is all the rows but only the last column, the tar
 
 min_max_scaler = preprocessing.MinMaxScaler()   # Scales the input features of X so that all input of the dataset lie within the range of 0 and 1
 X_scale = min_max_scaler.fit_transform(X)       # This is combination with a sigmoid function or ReLU algorithm will decide if the node should fire or not
+
 
 
 
