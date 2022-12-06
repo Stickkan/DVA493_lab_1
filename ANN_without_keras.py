@@ -4,13 +4,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import os as os 
+
+
+#import PlotDrawer as plot
+#import matlab
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
+
 sns.set_style('darkgrid')
 
-df = pd.read_csv('Diabetic.txt', skiprows = 24, header = None) # Reads the teext file and store it in dataframe (df)
+df = pd.read_csv('Diabetic.txt',  skiprows = 24, header = None)# Reads the teext file and store it in dataframe (df)
 
 df = pd.get_dummies(df, columns=[0, 1, 18])
 
@@ -103,7 +109,11 @@ supervise_val_df = pd.DataFrame(supervise_val)
 
 # ! Plot the training graph
 
+print(supervise_train_df) 
+print(supervise_val_df)
+
 fig, axes = plt.subplots(1, 2, figsize=(15,5))
 
 supervise_train_df.Mean_squared_error.plot(ax=axes[0], title = 'Mean squared error')
 supervise_val_df.Accuracy.plot(ax=axes[1], title = 'Accuracy')
+plt.show()
