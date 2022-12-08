@@ -3,14 +3,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
-sns.set_style('darkgrid')
-
-df = pd.read_csv('Diabetic.txt', skiprows = 24, header = None) # Reads the teext file and store it in dataframe (df)
+df = pd.read_csv('Diabetic.txt', skiprows = 24, header = None) # Reads the text file and store it in dataframe (df)
 
 df = pd.get_dummies(df, columns=[0, 1, 18])
 
