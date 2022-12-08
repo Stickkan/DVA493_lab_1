@@ -16,7 +16,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 df = pd.read_csv('Diabetic.txt', skiprows = 24, header = None) # Reads the text file and store it in dataframe (df)
 
-df = pd.get_dummies(df, columns=[0, 1, 18])
+#df = pd.get_dummies(df, columns=[0, 1, 18])
 
 scaler = MinMaxScaler()
 
@@ -28,8 +28,8 @@ x = df.drop(19, axis=1).values
 y = df[[19]].values
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)   # Splits the dataset into 75% training and 25% validation and test set
-x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.6)
-          # Splits the 25% into 10% validation and 15% into test set
+x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.6) # Splits the 25% into 10% validation and 15% into test set
+          
 # ! Own functions that will be called
 
 def sigmoid(x):
@@ -48,11 +48,11 @@ def accuracy(prediction, labels):
 # ! Fixed parameters for the ANN
 
 learning_rate = 0.1
-epochs = 100000 #Number of iterations
+epochs = 150000 #Number of iterations
 N = y_train.size
 
 # Number of nodes in each layer
-n_input = 22
+n_input = 19
 n_hidden_layer = 10
 n_output = 1
 
@@ -65,6 +65,8 @@ W2 = np.random.normal(scale= 0.5, size=(n_hidden_layer, n_output))
 
 supervise_train = {'Mean_squared_error': [], 'Accuracy': []}
 supervise_val = {'Mean_squared_error': [], 'Accuracy': []}
+
+temp = 1
 
 # ! Train the ANN
 
@@ -99,11 +101,28 @@ for epochs in range(epochs):
 
     mse_val = mse(output_layer_val, y_val)
     acc_val = accuracy(output_layer_val, y_val)
+
+    # Create a function that saves the best value for weights
+    if mse_val <= temp:
+        best_weight = [W1, W2]
+
     supervise_val['Mean_squared_error'].append(mse_val)
     supervise_val['Accuracy'].append(acc_val)
 
 supervise_train_df = pd.DataFrame(supervise_train)
 supervise_val_df = pd.DataFrame(supervise_val)
+
+# Changing the hidden layer to the best weight
+hidden_layer = sigmoid(np.dot(x_train, best_weight[0]))
+output_layer = sigmoid(np.dot(hidden_layer, best_weight[1]))
+    
+
+# Supervising the mean square error and the accuracy for the training set for each iteration
+mean_square_error = mse(output_layer, y_train)
+acc = accuracy(output_layer, y_train)
+
+print('Best Mean Square Error: '  + str(mean_square_error))
+print('Best Accuracy: ' + str(acc))
 
 # ! Plot the training graph
 
