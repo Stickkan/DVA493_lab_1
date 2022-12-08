@@ -27,8 +27,8 @@ df.head()
 x = df.drop(19, axis=1).values
 y = df[[19]].values
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.15)   # Splits the dataset into 75% training and 25% validation and test set
-x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.1176)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)   # Splits the dataset into 75% training and 25% validation and test set
+x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.6)
           # Splits the 25% into 10% validation and 15% into test set
 # ! Own functions that will be called
 
@@ -48,10 +48,10 @@ def accuracy(prediction, labels):
 # ! Fixed parameters for the ANN
 
 learning_rate = 0.1
-epochs = 250000 #Number of iterations
+epochs = 100000 #Number of iterations
 N = y_train.size
 
-# Number of nodes in each layer (recommendation from Ning)
+# Number of nodes in each layer
 n_input = 22
 n_hidden_layer = 10
 n_output = 1
@@ -81,7 +81,7 @@ for epochs in range(epochs):
     supervise_train['Accuracy'].append(acc)
 
     #Backward propagation - difference
-    d_output_layer = (output_layer - y_train) * output_layer * (1-output_layer)
+    d_output_layer = (output_layer - y_train) * output_layer * (1-output_layer) #Derivation of sigmoid
     d_hidden_layer= np.dot(d_output_layer, W2.T) * hidden_layer * (1-hidden_layer)
     
 
@@ -107,8 +107,8 @@ supervise_val_df = pd.DataFrame(supervise_val)
 
 # ! Plot the training graph
 
-print(supervise_train_df) 
-print(supervise_val_df)
+#print(supervise_train_df) 
+#print(supervise_val_df)
 
 fig, axes = plt.subplots(1, 2, figsize=(15,5))
 
